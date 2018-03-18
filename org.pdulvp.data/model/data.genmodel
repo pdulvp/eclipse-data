@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.pdulvp.data/src" creationIcons="false" editDirectory="/org.pdulvp.data.edit/src"
+    editorDirectory="/org.pdulvp.data.editor/src" modelPluginID="org.pdulvp.data"
+    modelName="Data" editPluginClass="org.pdulvp.data.provider.DataEditPlugin" editorPluginClass="org.pdulvp.data.presentation.DataEditorPlugin"
+    testSuiteClass="org.pdulvp.data.tests.DataAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.pdulvp.data.edit"
+    editorPluginID="org.pdulvp.data.editor" usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <foreignModel>data.ecore</foreignModel>
+  <genPackages prefix="Data" basePackage="org.pdulvp" resource="XMI" disposableProviderFactory="true"
+      childCreationExtenders="true" ecorePackage="data.ecore#/">
+    <genClasses ecoreClass="data.ecore#//ItemRoot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ItemRoot/ownedApplications"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ItemRoot/ownedScreenLists"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ItemRoot/ownedItemTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//ItemPkg">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ItemPkg/ownedItemPkgs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ItemPkg/ownedItems"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//ChildItem">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//ChildItem/categories"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//ScreenPkg">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ScreenPkg/ownedScreenPkgs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ScreenPkg/ownedScreens"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//CategoryPkg">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//CategoryPkg/ownedCategoryPkgs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//CategoryPkg/ownedCategories"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//ItemTypePkg">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ItemTypePkg/ownedTypePkgs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ItemTypePkg/ownedTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//Timestamp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Timestamp/timestamp"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="data.ecore#//AbstractItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//AbstractItem/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//AbstractItem/tag"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="data.ecore#//NamedItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//NamedItem/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//NamedItem/name_frFR"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//Category">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Category/visible"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Category/inapp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Category/inappDescription"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Category/inappTitle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Category/price"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//Category/parent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//Category/ownedCategories"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//Category/screens"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//Item"/>
+    <genClasses image="false" ecoreClass="data.ecore#//ImageItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/sourcePath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/dateCreated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/style"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/gImageDataPath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/gIconDataPath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/gIcon16Path"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//ImageItem/gType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/iconData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/imageData"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/packs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/rank"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ImageItem/metadatas"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ImageItem/externalPath"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//ImageItem/products"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//HomeItem">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//HomeItem/application"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//HomeItem/category"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//Screen">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Screen/ordering"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Screen/filtering"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//User">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//User/mail"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//User/password"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//User/favouriteCategories"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//User/favouriteItems"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//User/clickedItems"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//User/widgetedItems"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//User/gcm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//User/identifiers"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//ScreenList">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//ScreenList/category"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//ScreenList/screen"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ScreenList/iconData"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ScreenList/style"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//ScreenList/packs"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//HomeScreenList">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//HomeScreenList/application"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//CategoryView">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//CategoryView/screensIds"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//CategoryView/screensNames"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//FavouriteItemsView">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//FavouriteItemsView/user"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//FavouriteCategoriesView">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//FavouriteCategoriesView/user"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//ItemType"/>
+    <genClasses ecoreClass="data.ecore#//Metadatas">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/author_name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/author_email"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/licence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/category_name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/download"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/rate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/news"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/price"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/name_frFR"/>
+      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/description_frFR"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/shortDescription"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/mapsUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/image_mainUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/image_preview2Uri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/siteUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/tripAdvisorUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Metadatas/chart"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//ProductPkg">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ProductPkg/ownedProductPkgs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//ProductPkg/ownedProducts"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//Product">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//Product/ownedProducts"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//Product/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//ItemProduct">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//ItemProduct/item"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//ItemProduct/product"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//OAuthToken">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//OAuthToken/tokenId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//OAuthToken/deviceId"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//OAuthToken/user"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//Application">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//Application/ownedHomes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//Application/category"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//Application/schema"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Application/serverUrl"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//SchemaPkg">
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//SchemaPkg/ownedSchemas"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//Schema">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Schema/dbSchema"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Schema/namespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//Schema/ownedClasses"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//SchemaClass">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//SchemaClass/clazz"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//SchemaClass/table"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//SchemaClass/externalFeatures"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//SchemaFeature">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//SchemaFeature/table"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference data.ecore#//SchemaFeature/feature"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//RequestPkg">
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//RequestPkg/ownedRequests"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//RequestPkg/ownedRequestPkgs"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//Request">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//Request/ownedTriggers"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//JobPkg">
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//JobPkg/ownedJobs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//JobPkg/ownedJobPkgs"/>
+    </genClasses>
+    <genClasses ecoreClass="data.ecore#//Job"/>
+    <genClasses ecoreClass="data.ecore#//Trigger">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//Trigger/schedule"/>
+    </genClasses>
+    <nestedGenPackages prefix="Table" disposableProviderFactory="true" ecorePackage="data.ecore#//table">
+      <genClasses ecoreClass="data.ecore#//table/DTable">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//table/DTable/primaryKey"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//table/DTable/indexKeys"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//table/DTable/orderingKeys"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//table/DTable/filteringKeys"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//table/DTable/className"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//table/DTable/ownedAttributes"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//table/DTable/ownedReferences"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//table/DTable/pagination"/>
+      </genClasses>
+      <genClasses ecoreClass="data.ecore#//table/DFeature">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//table/DFeature/jsonName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//table/DFeature/editable"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//table/DFeature/external"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//table/DFeature/exportJson"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference data.ecore#//table/DFeature/feature"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//table/DFeature/many"/>
+      </genClasses>
+      <genClasses ecoreClass="data.ecore#//table/DAttribute"/>
+      <genClasses ecoreClass="data.ecore#//table/DReference"/>
+      <genClasses ecoreClass="data.ecore#//table/DKey">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference data.ecore#//table/DKey/features"/>
+      </genClasses>
+      <genClasses ecoreClass="data.ecore#//table/DNamedElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//table/DNamedElement/dbName"/>
+      </genClasses>
+      <genClasses ecoreClass="data.ecore#//table/DTablePkg">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference data.ecore#//table/DTablePkg/ownedTables"/>
+      </genClasses>
+      <genClasses ecoreClass="data.ecore#//table/DKeyValue">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference data.ecore#//table/DKeyValue/table"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference data.ecore#//table/DKeyValue/feature"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute data.ecore#//table/DKeyValue/value"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

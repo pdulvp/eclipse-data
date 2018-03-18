@@ -1,0 +1,36 @@
+/**
+ */
+package org.pdulvp.data.impl;
+
+import org.eclipse.emf.ecore.EClass;
+import org.pdulvp.data.DataPackage;
+import org.pdulvp.data.Item;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Item</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * @generated
+ */
+public class ItemImpl extends ImageItemImpl implements Item {
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	protected ItemImpl() {
+    super();
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	@Override
+	protected EClass eStaticClass() {
+    return DataPackage.Literals.ITEM;
+  }
+
+} //ItemImpl

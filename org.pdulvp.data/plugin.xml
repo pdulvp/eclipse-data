@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://org.pdulvp/data"
+            class="org.pdulvp.data.DataPackage"
+            genModel="model/data.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated data -->
+      <parser
+            type="data"
+            class="org.pdulvp.data.util.DataResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated data2 -->
+      <package
+            uri="http://org.pdulvp/table"
+            class="org.pdulvp.data.table.TablePackage"
+            genModel="model/data2.genmodel"/>
+   </extension>
+
+   <extension
+         point="org.eclipse.sirius.sessionManagerListener">
+      <listener
+            class="org.pdulvp.data.res.SessionManagerListener1">
+      </listener>
+   </extension>
+
+</plugin>

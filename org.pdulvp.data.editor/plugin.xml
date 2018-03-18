@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.pdulvp.data.presentation.DataModelWizardID"
+            name="%_UI_DataModelWizard_label"
+            class="org.pdulvp.data.presentation.DataModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DataModelFile.gif">
+         <description>%_UI_DataModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.pdulvp.data.presentation.DataEditorID"
+            name="%_UI_DataEditor_label"
+            icon="icons/full/obj16/DataModelFile.gif"
+            extensions="data"
+            class="org.pdulvp.data.presentation.DataEditor"
+            contributorClass="org.pdulvp.data.presentation.DataActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated data2 -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.pdulvp.data.table.presentation.TableModelWizardID"
+            name="%_UI_TableModelWizard_label"
+            class="org.pdulvp.data.table.presentation.TableModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/TableModelFile.gif">
+         <description>%_UI_TableModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated data2 -->
+      <editor
+            id="org.pdulvp.data.table.presentation.TableEditorID"
+            name="%_UI_TableEditor_label"
+            icon="icons/full/obj16/TableModelFile.gif"
+            extensions="table"
+            class="org.pdulvp.data.table.presentation.TableEditor"
+            contributorClass="org.pdulvp.data.table.presentation.TableActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated data -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.pdulvp.gamble.presentation.GambleModelWizardID"
+            name="%_UI_GambleModelWizard_label"
+            class="org.pdulvp.gamble.presentation.GambleModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/GambleModelFile.gif">
+         <description>%_UI_GambleModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated data -->
+      <editor
+            id="org.pdulvp.gamble.presentation.GambleEditorID"
+            name="%_UI_GambleEditor_label"
+            icon="icons/full/obj16/GambleModelFile.gif"
+            extensions="gamble"
+            class="org.pdulvp.gamble.presentation.GambleEditor"
+            contributorClass="org.pdulvp.gamble.presentation.GambleActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated data -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.pdulvp.twitter.presentation.TwitterModelWizardID"
+            name="%_UI_TwitterModelWizard_label"
+            class="org.pdulvp.twitter.presentation.TwitterModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/TwitterModelFile.gif">
+         <description>%_UI_TwitterModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated data -->
+      <editor
+            id="org.pdulvp.twitter.presentation.TwitterEditorID"
+            name="%_UI_TwitterEditor_label"
+            icon="icons/full/obj16/TwitterModelFile.gif"
+            extensions="twitter"
+            class="org.pdulvp.twitter.presentation.TwitterEditor"
+            contributorClass="org.pdulvp.twitter.presentation.TwitterActionBarContributor">
+      </editor>
+   </extension>
+
+
+</plugin>

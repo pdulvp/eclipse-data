@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="data" nsURI="http://org.pdulvp/data" nsPrefix="data">
+  <eClassifiers xsi:type="ecore:EClass" name="ItemRoot" eSuperTypes="#//AbstractItem #//CategoryPkg #//ProductPkg #//ItemPkg #//ScreenPkg #//ItemTypePkg #//table/DTablePkg">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedApplications" upperBound="-1"
+        eType="#//Application" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedScreenLists" upperBound="-1"
+        eType="#//ScreenList" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedItemTypes" upperBound="-1"
+        eType="#//ItemType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ItemPkg" eSuperTypes="#//NamedItem #//AbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedItemPkgs" upperBound="-1"
+        eType="#//ItemPkg" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedItems" upperBound="-1"
+        eType="#//ChildItem" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChildItem" abstract="true" eSuperTypes="#//AbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="categories" upperBound="-1"
+        eType="#//Category">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="itemId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="categoryId"/>
+        </eAnnotations>
+        <details key="db_table" value="itemsCategories"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScreenPkg" eSuperTypes="#//NamedItem #//AbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedScreenPkgs" upperBound="-1"
+        eType="#//ScreenPkg" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedScreens" upperBound="-1"
+        eType="#//Screen" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CategoryPkg" eSuperTypes="#//NamedItem #//AbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCategoryPkgs" upperBound="-1"
+        eType="#//CategoryPkg" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCategories" upperBound="-1"
+        eType="#//Category" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ItemTypePkg" eSuperTypes="#//NamedItem #//AbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypePkgs" upperBound="-1"
+        eType="#//ItemTypePkg" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypes" upperBound="-1"
+        eType="#//ItemType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Timestamp">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="timestamp"/>
+        <details key="db_type" value="timestamp"/>
+        <details key="edit" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractItem" abstract="true" eSuperTypes="#//Timestamp">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true">
+      <eAnnotations source="database">
+        <details key="db_id" value="id"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="tag"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedItem" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="name"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name_frFR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="namefrFR"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Category" eSuperTypes="#//NamedItem #//AbstractItem #//ItemPkg">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <details key="db_table" value="categories"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="database">
+        <details key="db_id" value="visible"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inapp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inappDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inappTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="price" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Category">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="parentId"/>
+        </eAnnotations>
+        <details key="db_id" value="parentId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCategories" upperBound="-1"
+        eType="#//Category" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="screens" upperBound="-1"
+        eType="#//Screen">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="categoryId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="screenId"/>
+        </eAnnotations>
+        <details key="db_table" value="categoriesScreens"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Item" eSuperTypes="#//ImageItem">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <details key="db_table" value="items"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageItem" abstract="true" eSuperTypes="#//ChildItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateCreated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="style"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gImageDataPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gIconDataPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gIcon16Path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gType" eType="#//ItemType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iconData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="iconData"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="imageData"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" derived="true">
+      <eAnnotations source="database">
+        <details key="db_id" value="packs"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rank" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="database">
+        <details key="db_id" value="rank"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metadatas" eType="#//Metadatas"
+        containment="true">
+      <eAnnotations source="database">
+        <details key="db_id" value="metadatas"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="products" upperBound="-1"
+        eType="#//Product">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="itemId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="productId"/>
+        </eAnnotations>
+        <details key="db_table" value="itemsProducts"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HomeItem" eSuperTypes="#//AbstractItem">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <details key="db_table" value="homes"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="application" eType="#//Application">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="applicationId"/>
+        </eAnnotations>
+        <details key="db_id" value="applicationId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="category" eType="#//Category">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="categoryId"/>
+        </eAnnotations>
+        <details key="db_id" value="categoryId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Screen" eSuperTypes="#//NamedItem #//AbstractItem">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <details key="db_table" value="screens"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="ordering"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filtering" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="filtering"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="User" eSuperTypes="#//AbstractItem">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <eAnnotations source="indexKey" references="#//User/mail"/>
+      <details key="db_table" value="users"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mail" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="mail"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="password"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="favouriteCategories" upperBound="-1"
+        eType="#//Category">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="userId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="categoryId"/>
+        </eAnnotations>
+        <details key="db_table" value="favouriteCategories"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="favouriteItems" upperBound="-1"
+        eType="#//ImageItem">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="userId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="itemId"/>
+        </eAnnotations>
+        <details key="db_table" value="favouriteItems"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clickedItems" upperBound="-1"
+        eType="#//ImageItem">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="userId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="itemId"/>
+        </eAnnotations>
+        <details key="db_table" value="usersClickedItems"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="widgetedItems" upperBound="-1"
+        eType="#//ImageItem">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="userId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="itemId"/>
+        </eAnnotations>
+        <details key="db_table" value="usersWidgetedItems"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gcm" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="userId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//User/gcm">
+          <details key="name" value="gcm"/>
+        </eAnnotations>
+        <details key="db_table" value="usersGcm"/>
+        <details key="db_id" value="usersGcm"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifiers" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="identifiers"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScreenList" eSuperTypes="#//AbstractItem">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <eAnnotations source="indexKey" references="#//ScreenList/category"/>
+      <eAnnotations source="ordering" references="#//AbstractItem/id">
+        <eAnnotations source="orderingTable" references="#//Screen"/>
+        <eAnnotations source="orderingValue" references="#//Screen/ordering"/>
+      </eAnnotations>
+      <eAnnotations source="filtering" references="#//AbstractItem/id">
+        <eAnnotations source="filteringTable" references="#//Screen"/>
+        <eAnnotations source="filteringValue" references="#//Screen/filtering"/>
+      </eAnnotations>
+      <details key="pagination" value="10"/>
+      <details key="db_table" value="screensLists"/>
+      <details key="description" value="This is the SQL-View used for all screens per category"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="category" eType="#//Category">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="categoryId"/>
+        </eAnnotations>
+        <details key="db_id" value="categoryId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="screen" eType="#//Screen">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="screenId"/>
+        </eAnnotations>
+        <details key="db_id" value="screenId"/>
+      </eAnnotations>
+      <eAnnotations source="deprecated"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iconData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="iconData"/>
+        <details key="external" value="true"/>
+        <details key="edit" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" derived="true">
+      <eAnnotations source="database">
+        <details key="db_id" value="style"/>
+        <details key="edit" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" derived="true">
+      <eAnnotations source="database">
+        <details key="db_id" value="packs"/>
+        <details key="external" value="true"/>
+        <details key="edit" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HomeScreenList" eSuperTypes="#//ScreenList">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <eAnnotations source="indexKey" references="#//HomeScreenList/application"/>
+      <eAnnotations source="excluded_toJSON" references="#//HomeScreenList/application"/>
+      <details key="db_table" value="homeScreensLists"/>
+      <details key="description" value="This is the SQL-View used for the home.json"/>
+      <details key="pagination" value="10"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="application" eType="#//Application">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/tag">
+          <details key="name" value="applicationTag"/>
+        </eAnnotations>
+        <details key="db_id" value="applicationTag"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CategoryView" eSuperTypes="#//Category">
+    <eAnnotations source="database">
+      <eAnnotations source="databasess">
+        <details key="viewSql" value="SELECT categories.id, categories.name, categories.&quot;parentId&quot;, categories.&quot;tag&quot;, array_agg(&quot;screenId&quot;) as &quot;screenIds&quot; from categories, &quot;categoriesScreens&quot; where &quot;categoriesScreens&quot;.&quot;categoryId&quot; = categories.id group by categories.id, categories.name, categories.&quot;parentId&quot;, categories.&quot;tag&quot;"/>
+        <details key="db_tabl" value="categoriesList"/>
+        <details key="s" value="SELECT &quot;itemId&quot;, array_agg(ppp) as &quot;categoriesId&quot; FROM ( SELECT items.id as &quot;itemId&quot;, &quot;itemsCategories&quot;.&quot;categoryId&quot; as cat, parent_categories(&quot;itemsCategories&quot;.&quot;categoryId&quot;) as ppp FROM items, &quot;itemsCategories&quot; WHERE (items.id = &quot;itemsCategories&quot;.&quot;itemId&quot;) group by items.id, &quot;itemsCategories&quot;.&quot;categoryId&quot; ) as List Group by &quot;itemId&quot;, cat"/>
+        <details key="db_tabls" value="itemsCategoriesAll"/>
+      </eAnnotations>
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <details key="db_table" value="categoriesView"/>
+      <details key="description" value="This is the SQL-View used for the categories.json"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="screensIds" eType="#//Screen"
+        derived="true">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="screensIds"/>
+        </eAnnotations>
+        <details key="db_id" value="screensIds"/>
+        <details key="edit" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="screensNames" eType="#//Screen"
+        derived="true">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//NamedItem/name">
+          <details key="name" value="screensNames"/>
+        </eAnnotations>
+        <details key="db_id" value="screensNames"/>
+        <details key="edit" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FavouriteItemsView" eSuperTypes="#//ScreenList">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//FavouriteItemsView/user"/>
+      <eAnnotations source="excluded_toJSON" references="#//FavouriteItemsView/user #//Timestamp/timestamp"/>
+      <details key="db_table" value="favouriteItemsView"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" eType="#//User">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="userId"/>
+        </eAnnotations>
+        <details key="db_id" value="userId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FavouriteCategoriesView" eSuperTypes="#//ScreenList">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//FavouriteCategoriesView/user"/>
+      <eAnnotations source="excluded_toJSON" references="#//FavouriteCategoriesView/user #//Timestamp/timestamp"/>
+      <details key="db_table" value="favouriteCategoriesView"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" eType="#//User">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="userId"/>
+        </eAnnotations>
+        <details key="db_id" value="userId"/>
+        <details key="toJSON" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ItemType" eSuperTypes="#//NamedItem #//AbstractItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Metadatas">
+    <eAnnotations source="database">
+      <details key="external" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="author_name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_author_name"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="author_email" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_author_email"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="licence" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_licence"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category_name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_category_name"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_version"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="download" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_download"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_rate"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="news" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_news"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_date"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_size"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="price" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_price"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_source"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_name"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name_frFR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_namefrFR"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_description"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description_frFR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_descriptionfrFR"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_description"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mapsUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_mapsUri"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="image_mainUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_image_mainUri"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="image_preview2Uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_image_preview2Uri"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="siteUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_siteUri"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tripAdvisorUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_tripAdvisorUri"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="chart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_chart"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProductPkg" eSuperTypes="#//NamedItem #//AbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProductPkgs" upperBound="-1"
+        eType="#//ProductPkg" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProducts" upperBound="-1"
+        eType="#//Product" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Product" eSuperTypes="#//NamedItem #//AbstractItem">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <details key="db_table" value="products"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProducts" upperBound="-1"
+        eType="#//Product" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Product">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="parentId"/>
+        </eAnnotations>
+        <details key="db_id" value="parentId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ItemProduct" eSuperTypes="#//AbstractItem">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <eAnnotations source="indexKey" references="#//ItemProduct/product #//ItemProduct/item"/>
+      <details key="db_table" value="itemsProducts"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="item" eType="#//Item">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="itemId"/>
+        </eAnnotations>
+        <details key="db_id" value="itemId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="product" eType="#//Product">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="productId"/>
+        </eAnnotations>
+        <details key="db_id" value="productId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OAuthToken" eSuperTypes="#//Timestamp">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//OAuthToken/tokenId"/>
+      <details key="db_table" value="tokens"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tokenId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true">
+      <eAnnotations source="database">
+        <details key="db_id" value="tokenId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deviceId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="deviceId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" eType="#//User">
+      <eAnnotations source="database">
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="userId"/>
+        </eAnnotations>
+        <details key="db_id" value="userId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Application" eSuperTypes="#//AbstractItem #//CategoryPkg #//ItemPkg #//ScreenPkg #//JobPkg #//RequestPkg #//SchemaPkg">
+    <eAnnotations source="database">
+      <eAnnotations source="primaryKey" references="#//AbstractItem/id"/>
+      <details key="db_table" value="applications"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedHomes" upperBound="-1"
+        eType="#//HomeItem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="category" eType="#//Category"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schema" eType="#//Schema"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serverUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SchemaPkg" eSuperTypes="#//AbstractItem #//NamedItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedSchemas" upperBound="-1"
+        eType="#//Schema" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Schema" eSuperTypes="#//AbstractItem #//NamedItem #//table/DTablePkg">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dbSchema" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="namespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedClasses" upperBound="-1"
+        eType="#//SchemaClass" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SchemaClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clazz" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="#//table/DTable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalFeatures" upperBound="-1"
+        eType="#//SchemaFeature" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SchemaFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="#//table/DTable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequestPkg" eSuperTypes="#//AbstractItem #//NamedItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRequests" upperBound="-1"
+        eType="#//Request" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRequestPkgs" upperBound="-1"
+        eType="#//RequestPkg" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Request" eSuperTypes="#//AbstractItem #//NamedItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTriggers" upperBound="-1"
+        eType="#//Trigger" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JobPkg" eSuperTypes="#//AbstractItem #//NamedItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedJobs" upperBound="-1"
+        eType="#//Job" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedJobPkgs" upperBound="-1"
+        eType="#//JobPkg" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Job" eSuperTypes="#//AbstractItem #//NamedItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Trigger" eSuperTypes="#//AbstractItem #//NamedItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="schedule" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eSubpackages name="table" nsURI="http://org.pdulvp/table" nsPrefix="table">
+    <eClassifiers xsi:type="ecore:EClass" name="DTable" eSuperTypes="#//table/DNamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="primaryKey" eType="#//table/DKey"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="indexKeys" upperBound="-1"
+          eType="#//table/DKey" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="orderingKeys" upperBound="-1"
+          eType="#//table/DKeyValue" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="filteringKeys" upperBound="-1"
+          eType="#//table/DKeyValue" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttributes" upperBound="-1"
+          eType="#//table/DAttribute" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedReferences" upperBound="-1"
+          eType="#//table/DReference" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="pagination" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DFeature" eSuperTypes="#//table/DNamedElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="jsonName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="database">
+          <details key="db_id" value="name"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="editable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="external" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exportJson" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="many" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DAttribute" eSuperTypes="#//table/DFeature"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DReference" eSuperTypes="#//table/DFeature"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DKey" eSuperTypes="#//table/DNamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
+          eType="#//table/DFeature"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DNamedElement" eSuperTypes="#//AbstractItem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="dbName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="database">
+          <details key="db_id" value="name"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DTablePkg" eSuperTypes="#//table/DNamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTables" upperBound="-1"
+          eType="#//table/DTable" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DKeyValue" eSuperTypes="#//table/DNamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="#//table/DTable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="#//table/DFeature"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
