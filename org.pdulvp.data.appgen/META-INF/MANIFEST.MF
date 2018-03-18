@@ -6,11 +6,11 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.pdulvp.common,
  org.eclipse.jface,
- org.pdulvp.data,
  org.pdulvp.retriever.model.handler,
  com.juuyi.security,
  org.apache.commons.collections4,
  org.apache.commons.lang3,
  org.eclipse.sirius,
+ org.pdulvp.data,
  json
-Export-Package: org.pdulvp.data.appgen.site
+Export-Package: org.pdulvp.data.appgen.site.command

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="basic" nsURI="http://org.pdulvp/basic" nsPrefix="basic">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true">
+      <eAnnotations source="database"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//AbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedClasses" upperBound="-1"
+        eType="#//Class">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="packageId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="classId"/>
+        </eAnnotations>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInterfaces" upperBound="-1"
+        eType="#//Interface">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="packageId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="interfaceId"/>
+        </eAnnotations>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//AbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProperties" upperBound="-1"
+        eType="#//Property">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="classId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="propertyId"/>
+        </eAnnotations>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"
+        eType="#//Interface">
+      <eAnnotations source="database">
+        <eAnnotations source="sourceFeature" references="#//AbstractItem/id">
+          <details key="name" value="classId"/>
+        </eAnnotations>
+        <eAnnotations source="targetFeature" references="#//AbstractItem/id">
+          <details key="name" value="interfaceId"/>
+        </eAnnotations>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extend" eType="#//Class">
+      <eAnnotations source="database"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inherit" eType="#//Class">
+      <eAnnotations source="database">
+        <details key="deprecated" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metadata" eType="#//Metadata">
+      <eAnnotations source="database">
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interface" eSuperTypes="#//AbstractItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//AbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Class">
+      <eAnnotations source="database"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metadata">
+    <eAnnotations source="database">
+      <details key="external" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="author" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_author"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commiter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="database">
+        <details key="db_id" value="meta_commiter"/>
+        <details key="external" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

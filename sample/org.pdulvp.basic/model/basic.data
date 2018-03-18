@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data:ItemRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://org.pdulvp/data" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" id="bd725a1f-6453-46e2-a75d-46e350a960a6">
+  <ownedCategoryPkgs xsi:type="data:Application" id="a9fb722f-c8c4-4030-a671-c52fc06e61c9" tag="org.pdulvp.basic" name="basic" category="dca18173-8e49-46e2-932c-b7f28d34b3dd" serverUrl="http://sample.org">
+    <ownedCategoryPkgs id="a24ce159-6215-429e-93dc-5da1636dc643">
+      <ownedCategories name="root.basic" id="dca18173-8e49-46e2-932c-b7f28d34b3dd" inappTitle=""/>
+    </ownedCategoryPkgs>
+    <ownedSchemas timestamp="20180318155506" id="88162996-4404-4c25-9ce5-bd47d48fc3e1" name="basic" dbName="" dbSchema="dp_sample" namespace="basic">
+      <ownedTables timestamp="20180318155506" id="2273f5b7-f00d-4851-88a9-9efda946bb77" dbName="class" className="Class">
+        <primaryKey timestamp="20180318155506" id="5eb4e318-4afd-4259-8250-f17aa616433c" dbName="primaryKey" features="e6309360-8610-4c3c-9d8e-0c931326b8a1"/>
+        <ownedAttributes id="e6309360-8610-4c3c-9d8e-0c931326b8a1" dbName="id" jsonName="id" editable="true" exportJson="true">
+          <feature xsi:type="ecore:EAttribute" href="basic.ecore#//AbstractItem/id"/>
+        </ownedAttributes>
+        <ownedAttributes id="8f693642-b5fb-4081-af9f-536dc1523095" dbName="name" jsonName="name" editable="true" exportJson="true">
+          <feature xsi:type="ecore:EAttribute" href="basic.ecore#//AbstractItem/name"/>
+        </ownedAttributes>
+        <ownedReferences id="616fb1b3-49ab-461c-bcd4-3c1c933dbc11" dbName="extend" jsonName="extend" editable="true" exportJson="true">
+          <feature xsi:type="ecore:EReference" href="basic.ecore#//Class/extend"/>
+        </ownedReferences>
+      </ownedTables>
+      <ownedTables timestamp="20180318155506" id="39baab25-d09a-4677-99ec-180b09349374" dbName="ownedproperties" className="Ownedproperties">
+        <primaryKey timestamp="20180318155506" id="95fc39a2-2537-4ad0-8705-08bdeddc1e4d" dbName="primaryKey"/>
+      </ownedTables>
+      <ownedTables timestamp="20180318155506" id="d48dba1e-4f11-4238-9bfc-51e3972e7897" dbName="implements" className="Implements">
+        <primaryKey timestamp="20180318155506" id="652e8935-8b27-406a-aff8-8b1204fbecfa" dbName="primaryKey"/>
+      </ownedTables>
+      <ownedTables timestamp="20180318155506" id="c3f54431-8159-4e20-8824-af3d0691a0e4" dbName="property" className="Property">
+        <primaryKey timestamp="20180318155506" id="4eeb3885-1154-4f15-b8bf-c1081876020e" dbName="primaryKey" features="8d3db822-9530-4fca-b61d-0e5312422f6e"/>
+        <ownedAttributes id="8d3db822-9530-4fca-b61d-0e5312422f6e" dbName="id" jsonName="id" editable="true" exportJson="true">
+          <feature xsi:type="ecore:EAttribute" href="basic.ecore#//AbstractItem/id"/>
+        </ownedAttributes>
+        <ownedAttributes id="e315068e-cb8b-442f-8827-9a170579ccc0" dbName="name" jsonName="name" editable="true" exportJson="true">
+          <feature xsi:type="ecore:EAttribute" href="basic.ecore#//AbstractItem/name"/>
+        </ownedAttributes>
+        <ownedReferences id="30cb1468-9b5f-45f1-a609-f6641213a370" dbName="type" jsonName="type" editable="true" exportJson="true">
+          <feature xsi:type="ecore:EReference" href="basic.ecore#//Property/type"/>
+        </ownedReferences>
+      </ownedTables>
+      <ownedTables timestamp="20180318155506" id="8b84a9ef-253c-487b-94b9-6f56b86c70cd" dbName="interface" className="Interface">
+        <primaryKey timestamp="20180318155506" id="9af61583-c8cc-4d79-9222-8fd8624a5c5a" dbName="primaryKey" features="8a96fead-1e2b-4a92-840b-36483163fc86"/>
+        <ownedAttributes id="8a96fead-1e2b-4a92-840b-36483163fc86" dbName="id" jsonName="id" editable="true" exportJson="true">
+          <feature xsi:type="ecore:EAttribute" href="basic.ecore#//AbstractItem/id"/>
+        </ownedAttributes>
+        <ownedAttributes id="1830b8d0-6dba-498e-90a5-a468150bbef1" dbName="name" jsonName="name" editable="true" exportJson="true">
+          <feature xsi:type="ecore:EAttribute" href="basic.ecore#//AbstractItem/name"/>
+        </ownedAttributes>
+      </ownedTables>
+      <ownedTables timestamp="20180318155506" id="04aa2e57-de11-4f2c-b126-070b28741966" dbName="package" className="Package">
+        <primaryKey timestamp="20180318155506" id="19f28aee-29cd-4830-bd1e-124d09e7088e" dbName="primaryKey" features="79c56fc6-8aa0-4246-a9d5-691093280dbe"/>
+        <ownedAttributes id="79c56fc6-8aa0-4246-a9d5-691093280dbe" dbName="id" jsonName="id" editable="true" exportJson="true">
+          <feature xsi:type="ecore:EAttribute" href="basic.ecore#//AbstractItem/id"/>
+        </ownedAttributes>
+        <ownedAttributes id="dc6d25ad-f09d-4719-a4ac-d4cf423ca36f" dbName="name" jsonName="name" editable="true" exportJson="true">
+          <feature xsi:type="ecore:EAttribute" href="basic.ecore#//AbstractItem/name"/>
+        </ownedAttributes>
+      </ownedTables>
+      <ownedTables timestamp="20180318155506" id="ab5da761-5836-4243-9890-06b3bf2f95c9" dbName="ownedclasses" className="Ownedclasses">
+        <primaryKey timestamp="20180318155506" id="6570febf-5126-4564-b897-36bbf9de093c" dbName="primaryKey"/>
+      </ownedTables>
+      <ownedTables timestamp="20180318155506" id="b648f4b8-6d14-4638-b348-aab81cc88305" dbName="ownedinterfaces" className="Ownedinterfaces">
+        <primaryKey timestamp="20180318155506" id="10b47037-e8c6-4078-ad75-2bc35e3c7235" dbName="primaryKey"/>
+      </ownedTables>
+      <ownedClasses table="2273f5b7-f00d-4851-88a9-9efda946bb77">
+        <clazz href="basic.ecore#//Class"/>
+        <externalFeatures table="39baab25-d09a-4677-99ec-180b09349374">
+          <feature xsi:type="ecore:EReference" href="basic.ecore#//Class/ownedProperties"/>
+        </externalFeatures>
+        <externalFeatures table="d48dba1e-4f11-4238-9bfc-51e3972e7897">
+          <feature xsi:type="ecore:EReference" href="basic.ecore#//Class/implements"/>
+        </externalFeatures>
+      </ownedClasses>
+      <ownedClasses table="c3f54431-8159-4e20-8824-af3d0691a0e4">
+        <clazz href="basic.ecore#//Property"/>
+      </ownedClasses>
+      <ownedClasses table="8b84a9ef-253c-487b-94b9-6f56b86c70cd">
+        <clazz href="basic.ecore#//Interface"/>
+      </ownedClasses>
+      <ownedClasses table="04aa2e57-de11-4f2c-b126-070b28741966">
+        <clazz href="basic.ecore#//Package"/>
+        <externalFeatures table="ab5da761-5836-4243-9890-06b3bf2f95c9">
+          <feature xsi:type="ecore:EReference" href="basic.ecore#//Package/ownedClasses"/>
+        </externalFeatures>
+        <externalFeatures table="b648f4b8-6d14-4638-b348-aab81cc88305">
+          <feature xsi:type="ecore:EReference" href="basic.ecore#//Package/ownedInterfaces"/>
+        </externalFeatures>
+      </ownedClasses>
+    </ownedSchemas>
+  </ownedCategoryPkgs>
+</data:ItemRoot>

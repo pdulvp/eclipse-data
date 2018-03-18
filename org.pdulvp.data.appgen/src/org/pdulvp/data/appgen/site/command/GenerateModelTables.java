@@ -1,6 +1,5 @@
 package org.pdulvp.data.appgen.site.command;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.function.Predicate;
@@ -19,7 +18,6 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.osgi.util.NLS;
 import org.pdulvp.common.commands.TransactionalProgressCommandHandler;
 import org.pdulvp.common.helpers.Couple;
 import org.pdulvp.data.DataFactory;
@@ -130,58 +128,11 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
 
   }
 
-  protected Collection<EAnnotation> getSourceFeatures(EAttribute reference) {
-    ArrayList<EAnnotation> features = new ArrayList<EAnnotation>();
-    for (EAnnotation feature : JSONBufferExt.getRelatedFeatures(reference)) {
-      if (isSource(reference, feature)) {
-        features.add(feature);
-      }
-    }
-    return features;
-  }
 
-  protected boolean isSource(EAttribute reference, EAnnotation feature) {
-    return !JSONBufferExt.getRelatedFeatureIsMany(reference, feature);
-  }
-
-  protected DFeature getFeature(DTable table, EStructuralFeature feature) {
-	  for (DAttribute attribute : table.getOwnedAttributes()) {
-		  if (feature.equals(attribute.getFeature())) {
-			  return attribute;
-		  }
-	  }
-	  for (DReference attribute : table.getOwnedReferences()) {
-		  if (feature.equals(attribute.getFeature())) {
-			  return attribute;
-		  }
-	  }
-	  return null;
-  }
-  
-  private String getOrderingValue(Schema schema, DKeyValue indexKey, DTable table, EStructuralFeature feature) {
-	String result = NLS.bind("$this->serviceManager->get(''{0}\\Table\\{1}Table'')->get(${2})->{3}.\" DESC\"",
-    new String[] { schema.getNamespace(), table.getDbName(), indexKey.getDbName(), feature.getName() });
-    return result;
-  }
-
-  private String getFilteringValue(Schema schema, DKeyValue indexKey, DTable table, EStructuralFeature feature) {
-		String dbKey = table.getPrimaryKey().getFeatures().iterator().next().getDbName();
-	    String result = NLS.bind("$this->serviceManager->get(''{0}\\Table\\{1}Table'')->get(${2})->{3}",
-	    new String[] { schema.getNamespace(), table.getDbName(), indexKey.getDbName(), feature.getName() });
-	    return result;
-  }
-
-  private Integer getPagination(EClass clazz) {
-    if (clazz.getEAnnotation("database").getDetails().containsKey("pagination")) {
-      return Integer.valueOf(clazz.getEAnnotation("database").getDetails().get("pagination"));
-    }
-    return null;
-  }
-
-  protected void createSchemaTable(SchemaClass clazz, EAttribute ref, Schema schema) {
+  public static void createSchemaTable(SchemaClass clazz, EAttribute ref, Schema schema) {
     DTable table = TableFactory.eINSTANCE.createDTable();
-    table.setDbName(getDBName(ref));
-    table.setClassName(getClassName(ref));
+    table.setDbName(JSONBufferExt.getDBName(ref));
+    table.setClassName(JSONBufferExt.getClassName(ref));
     schema.getOwnedTables().add(table);
     
     SchemaFeature sFeature = DataFactory.eINSTANCE.createSchemaFeature();
@@ -193,11 +144,11 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
     table.setPrimaryKey(key);
     key.setDbName("primaryKey");
 
-    for (EAnnotation annotation : JSONBufferExt.getRelatedFeatures(ref)) {
+    for (EAnnotation annotation : JSONBufferExt.getRelatedFeatures(clazz, ref)) {
       DFeature feature = annotation.getReferences().get(0) instanceof EAttribute
           ? TableFactory.eINSTANCE.createDAttribute() : TableFactory.eINSTANCE.createDReference();
-      feature.setDbName(getDBName(ref, annotation));
-      feature.setJsonName(getJSONName(ref, annotation));
+      feature.setDbName(JSONBufferExt.getDBName(ref, annotation));
+      feature.setJsonName(JSONBufferExt.getJSONName(ref, annotation));
       feature.setEditable(true);
       feature.setExternal(false);
       feature.setFeature((EStructuralFeature)annotation.getReferences().get(0));
@@ -219,10 +170,10 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
     }
   }
 
-  protected void createSchemaTable(SchemaClass clazz, EReference ref, Schema schema) {
+  public static void createSchemaTable(SchemaClass clazz, EReference ref, Schema schema) {
     DTable table = TableFactory.eINSTANCE.createDTable();
-    table.setDbName(getDBName(ref));
-    table.setClassName(getClassName(ref));
+    table.setDbName(JSONBufferExt.getDBName(ref));
+    table.setClassName(JSONBufferExt.getClassName(ref));
     schema.getOwnedTables().add(table);
     
     SchemaFeature sFeature = DataFactory.eINSTANCE.createSchemaFeature();
@@ -234,11 +185,11 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
     table.setPrimaryKey(key);
     key.setDbName("primaryKey");
 
-    for (EAnnotation annotation : JSONBufferExt.getRelatedFeatures(ref)) {
+    for (EAnnotation annotation : JSONBufferExt.getRelatedFeatures(clazz, ref)) {
       DFeature feature = annotation.getReferences().get(0) instanceof EAttribute
           ? TableFactory.eINSTANCE.createDAttribute() : TableFactory.eINSTANCE.createDReference();
-      feature.setDbName(getDBName(ref, annotation));
-      feature.setJsonName(getJSONName(ref, annotation));
+      feature.setDbName(JSONBufferExt.getDBName(ref, annotation));
+      feature.setJsonName(JSONBufferExt.getJSONName(ref, annotation));
       feature.setEditable(true);
       feature.setMany(false);
       feature.setFeature((EStructuralFeature)annotation.getReferences().get(0));
@@ -261,35 +212,10 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
     }
   }
 
-  protected String getClassName(EClass clazz) {
-    String name = clazz.getEAnnotation("database").getDetails().get("db_table");
-    name = SchemaExt.toUpperFirst(name);
-    return name;
-  }
-  protected String getClassName(EStructuralFeature ref) {
-    String name = ref.getEAnnotation("database").getDetails().get("db_table");
-    name = SchemaExt.toUpperFirst(name);
-    return name;
-  }
-  
-  protected String getDBName(EClass clazz) {
-    String name = clazz.getEAnnotation("database").getDetails().get("db_table");
-    return name;
-  }
-  
-  protected String getDBName(EStructuralFeature ref) {
-    String name = ref.getEAnnotation("database").getDetails().get("db_table");
-    return name;
-  }
-
-  protected String getDBName(EStructuralFeature ref, EAnnotation feature) {
-    return JSONBufferExt.getRelatedFeatureName(feature);
-  }
-
-  protected DTable createSchemaTable(SchemaClass sclazz, Schema schema) {
+  public static DTable createSchemaTable(SchemaClass sclazz, Schema schema) {
     EClass clazz = sclazz.getClazz();
     DTable table = TableFactory.eINSTANCE.createDTable();
-    table.setDbName(getDBName(clazz));
+    table.setDbName(JSONBufferExt.getDBName(clazz));
     table.setClassName(SchemaExt.getClassName(clazz));
     schema.getOwnedTables().add(table);
     sclazz.setTable(table);
@@ -299,40 +225,40 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
     key.setDbName("primaryKey");
     HashMap<EStructuralFeature, DFeature> features = new HashMap<EStructuralFeature, DFeature>();
 
-    for (EStructuralFeature feature : getAttributes(clazz)) {
+    for (EStructuralFeature feature : JSONBufferExt.getAttributes(clazz)) {
       DAttribute attribute = TableFactory.eINSTANCE.createDAttribute();
       features.put(feature, attribute);
-      attribute.setDbName(getDBName(clazz, feature));
-      attribute.setJsonName(getJSONName(clazz, feature));
+      attribute.setDbName(JSONBufferExt.getDBName(clazz, feature));
+      attribute.setJsonName(JSONBufferExt.getJSONName(clazz, feature));
       attribute.setMany(feature.isMany());
       attribute.setFeature(feature);
-      attribute.setEditable(isEditable(feature));
-      attribute.setExternal(isExternal(feature));
-      attribute.setExportJson(isExportJson(clazz, feature));
+      attribute.setEditable(JSONBufferExt.isEditable(feature));
+      attribute.setExternal(JSONBufferExt.isExternal(feature));
+      attribute.setExportJson(JSONBufferExt.isExportJson(clazz, feature));
       table.getOwnedAttributes().add(attribute);
     }
 
-    for (EStructuralFeature feature : getReferences(clazz)) {
+    for (EStructuralFeature feature : JSONBufferExt.getUnaryReferences(clazz)) {
       DReference reference = TableFactory.eINSTANCE.createDReference();
       features.put(feature, reference);
-      reference.setDbName(getDBName(clazz, feature));
-      reference.setJsonName(getJSONName(clazz, feature));
+      reference.setDbName(JSONBufferExt.getDBName(clazz, feature));
+      reference.setJsonName(JSONBufferExt.getJSONName(clazz, feature));
       reference.setFeature(feature);
       reference.setMany(feature.isMany());
-      reference.setEditable(isEditable(feature));
-      reference.setExternal(isExternal(feature));
-      reference.setExportJson(isExportJson(clazz, feature));
+      reference.setEditable(JSONBufferExt.isEditable(feature));
+      reference.setExternal(JSONBufferExt.isExternal(feature));
+      reference.setExportJson(JSONBufferExt.isExportJson(clazz, feature));
       table.getOwnedReferences().add(reference);
     }
 
-    for (EStructuralFeature feature : getPrimaryKey(clazz)) {
+    for (EStructuralFeature feature : JSONBufferExt.getPrimaryKey(clazz)) {
       DFeature dfeature = features.get(feature);
       if (dfeature != null) {
         key.getFeatures().add(dfeature);
       }
     }
 
-    for (Collection<ENamedElement> index : getIndexKeys(clazz)) {
+    for (Collection<ENamedElement> index : JSONBufferExt.getIndexKeys(clazz)) {
     	if (!index.isEmpty()) {
 	      DKey indexKey = TableFactory.eINSTANCE.createDKey();
 	      table.getIndexKeys().add(indexKey);
@@ -347,7 +273,7 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
     	}
     }
 
-    for (EStructuralFeature feature : getPrimaryKey(clazz)) {
+    for (EStructuralFeature feature : JSONBufferExt.getPrimaryKey(clazz)) {
       DFeature dfeature = features.get(feature);
       if (dfeature != null) {
         key.getFeatures().add(dfeature);
@@ -357,16 +283,16 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
     return table;
   }
 
-	private void createTableKeys(SchemaClass sclazz, Schema schema) {
+  public static void createTableKeys(SchemaClass sclazz, Schema schema) {
 		DTable table = sclazz.getTable();
 		EClass clazz = sclazz.getClazz();
 		
-	    for (EAnnotation feature : getOrderingFeatures(clazz)) {
-	    	Couple<EClass, EStructuralFeature> values = getOrderingFeatures(clazz, feature);
+	    for (EAnnotation feature : JSONBufferExt.getOrderingFeatures(clazz)) {
+	    	Couple<EClass, EStructuralFeature> values = JSONBufferExt.getOrderingFeatures(clazz, feature);
 	    	DKeyValue indexKey = TableFactory.eINSTANCE.createDKeyValue();
 	    	
 	    	indexKey.setTable(SchemaExt.getTable(values.getK(), schema));
-	    	indexKey.setFeature(getFeature(indexKey.getTable(), values.getV()));
+	    	indexKey.setFeature(JSONBufferExt.getFeature(indexKey.getTable(), values.getV()));
 	    	indexKey.setDbName(indexKey.getFeature().getDbName());
 	    	
 	    	//getDBNameVariable(values.getK(), getTable(values.getK(), tables).getPrimaryKey().getFeatures().iterator().next()));
@@ -374,12 +300,12 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
 		    table.getOrderingKeys().add(indexKey);
 	    }
 
-	    for (EAnnotation feature : getFilteringFeatures(clazz)) {
-	    	Couple<EClass, EStructuralFeature> values = getOrderingFeatures(clazz, feature);
+	    for (EAnnotation feature : JSONBufferExt.getFilteringFeatures(clazz)) {
+	    	Couple<EClass, EStructuralFeature> values = JSONBufferExt.getOrderingFeatures(clazz, feature);
 	    	DKeyValue indexKey = TableFactory.eINSTANCE.createDKeyValue();
 	    	
 	    	indexKey.setTable(SchemaExt.getTable(values.getK(), schema));
-	    	indexKey.setFeature(getFeature(indexKey.getTable(), values.getV()));
+	    	indexKey.setFeature(JSONBufferExt.getFeature(indexKey.getTable(), values.getV()));
 	    	indexKey.setDbName(indexKey.getFeature().getDbName());
 	    	
 	    	//indexKey.setDbName(getDBNameVariable(values.getK(), getTable(values.getK(), tables).getPrimaryKey().getFeatures().iterator().next()));
@@ -391,93 +317,4 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
   
 
 
-
-protected Couple<EClass, EStructuralFeature> getOrderingFeatures(EClass clazz, EAnnotation annotation) {
-    ArrayList<EAnnotation> features = new ArrayList<EAnnotation>();
-    EStructuralFeature feature = (EStructuralFeature)annotation.getReferences().get(0);
-    if (annotation.getEAnnotation("orderingValue") != null) {
-    	feature = (EStructuralFeature)annotation.getEAnnotation("orderingValue").getReferences().get(0);
-    } else if (annotation.getEAnnotation("filteringValue") != null) {
-    	feature = (EStructuralFeature)annotation.getEAnnotation("filteringValue").getReferences().get(0);
-    }
-    
-    if (annotation.getEAnnotation("orderingTable") != null) {
-    	clazz = (EClass)annotation.getEAnnotation("orderingTable").getReferences().get(0);
-    } else if (annotation.getEAnnotation("filteringTable") != null) {
-    	clazz = (EClass)annotation.getEAnnotation("filteringTable").getReferences().get(0);
-    }
-    return new Couple<EClass, EStructuralFeature>(clazz, feature);
-  }
-
-  protected Collection<EAnnotation> getOrderingFeatures(EClass clazz) {
-    ArrayList<EAnnotation> features = new ArrayList<EAnnotation>();
-    features.addAll(JSONBufferExt.getOrdering(clazz));
-    return features;
-  }
-
-  protected Collection<EAnnotation> getFilteringFeatures(EClass clazz) {
-    ArrayList<EAnnotation> features = new ArrayList<EAnnotation>();
-    features.addAll(JSONBufferExt.getFiltering(clazz));
-    return features;
-  }
-
-  protected Collection<Collection<ENamedElement>> getIndexKeys(EClass clazz) {
-    return JSONBufferExt.getIndexes(clazz);
-  }
-
-  protected Collection<EStructuralFeature> getPrimaryKey(EClass clazz) {
-    ArrayList<EStructuralFeature> features = new ArrayList<EStructuralFeature>();
-    features.addAll(JSONBufferExt.getExportableIdentifier(clazz));
-    return features;
-  }
-
-  protected Collection<EStructuralFeature> getAttributes(EClass clazz) {
-    ArrayList<EStructuralFeature> features = new ArrayList<EStructuralFeature>();
-    features.addAll(JSONBufferExt.getAttributes(clazz));
-    return features;
-  }
-
-  protected Collection<EStructuralFeature> getReferences(EClass clazz) {
-    ArrayList<EStructuralFeature> features = new ArrayList<EStructuralFeature>();
-    features.addAll(JSONBufferExt.getUnaryReferences(clazz));
-    //features.addAll(JSONBufferExt.getExternalReferences(clazz));
-    return features;
-  }
-
-  protected String getDBName(EClass clazz, EStructuralFeature feature) {
-    return JSONBufferExt.getExportableFeatureName(feature);
-  }
-
-  protected String getDBNameVariable(EClass clazz, DFeature dFeature) {
-    String name = clazz.getName();
-    String featureName = dFeature.getDbName();
-    name = SchemaExt.toLowerFirst(name);
-    name += SchemaExt.toUpperFirst(featureName);
-    return name;
-  }
-  
-  private boolean isExportJson(EClass clazz, EStructuralFeature feature) {
-    try {
-      return !clazz.getEAnnotation("database").getEAnnotation("excluded_toJSON").getReferences().contains(feature);
-    } catch (Exception e) {
-      return true;
-    }
-  }
-
-  protected String getJSONName(EStructuralFeature reference, EAnnotation feature) {
-    return JSONBufferExt.getRelatedFeatureName(feature);
-  }
-
-  protected String getJSONName(EClass clazz, EStructuralFeature feature) {
-    return JSONBufferExt.getJSONExportableFeatureName(feature);
-  }
-
-  protected boolean isEditable(EStructuralFeature feature) {
-    return !(feature.getEAnnotation("database").getDetails().containsKey("edit")
-        && "false".equals(feature.getEAnnotation("database").getDetails().get("edit")));
-  }
-
-  protected boolean isExternal(EStructuralFeature feature) {
-    return JSONBufferExt.isExternal(feature);
-  }
 }

@@ -9,7 +9,7 @@ public class ExportableAttribute extends ExportableFeature {
 	@Override
 	public boolean evaluate(EStructuralFeature feature) {
 		if (super.evaluate(feature)) {
-			if (feature instanceof EAttribute ) {
+			if (feature instanceof EAttribute) {
 				return true;
 				
 			} else if ( feature instanceof EReference && !feature.isMany() && feature.getEAnnotation("database").getDetails().containsKey("external")) {

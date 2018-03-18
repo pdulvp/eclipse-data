@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.pdulvp.basic/src-gen" editDirectory="/org.pdulvp.basic.edit/src-gen"
+    editorDirectory="/org.pdulvp.basic.editor/src-gen" modelPluginID="org.pdulvp.basic"
+    modelName="Basic" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    testsDirectory="/org.pdulvp.basic.tests/src-gen" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" testsPluginID="org.pdulvp.basic.tests"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>basic.ecore</foreignModel>
+  <genPackages prefix="basic" basePackage="org.pdulvp" disposableProviderFactory="true"
+      fileExtensions="basic" ecorePackage="basic.ecore#/">
+    <genClasses ecoreClass="basic.ecore#//Class">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference basic.ecore#//Class/ownedProperties"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference basic.ecore#//Class/implements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference basic.ecore#//Class/extend"/>
+    </genClasses>
+    <genClasses ecoreClass="basic.ecore#//Property">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference basic.ecore#//Property/type"/>
+    </genClasses>
+    <genClasses ecoreClass="basic.ecore#//Interface"/>
+    <genClasses ecoreClass="basic.ecore#//AbstractItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute basic.ecore#//AbstractItem/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute basic.ecore#//AbstractItem/name"/>
+    </genClasses>
+    <genClasses ecoreClass="basic.ecore#//Package">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference basic.ecore#//Package/ownedClasses"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference basic.ecore#//Package/ownedInterfaces"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
