@@ -11,9 +11,9 @@ From an annotated ecore
 ![ecore](doc/ecore.png?raw=true "Ecore")
 
 It generates a database schema
-![schema](doc/ecore.png?raw=true "Database Schema")
+![schema](doc/schema.png?raw=true "Database Schema")
 
 And PHP Rest API
-![php](doc/ecore.png?raw=true "Php")
+![php](doc/php.png?raw=true "Php")
 
 
