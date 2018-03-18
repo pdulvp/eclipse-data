@@ -7,13 +7,15 @@ This plugin allows to edit content of an SQL database accessible through a PHP s
 * It generate REST apis for a ZEND based PHP server
 * Apis can be used by other applications or by this one to directly get/edit the database
 
-From an annotated ecore
+### How it works ###
+
 ![ecore](doc/ecore.png?raw=true "Ecore")
+From an annotated ecore
 
-It generates a database schema
 ![schema](doc/schema.png?raw=true "Database Schema")
+It generates a database schema
 
-And PHP Rest API
 ![php](doc/php.png?raw=true "Php")
+And PHP Rest API
 
 
