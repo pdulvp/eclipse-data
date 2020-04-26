@@ -33,13 +33,13 @@ public class PublishScreens extends ProgressCommandHandler {
 		
     for (Object o : selection) {
       Application application = CategoryExt.getApplication((EObject)o);
-      EObjectExt.apply(new AttributesClosure(application, "screens"), Collections.singletonList((EObject) o).iterator(),
+      EObjectExt.apply(new AttributesClosure(application, "screens"), Collections.singletonList((EObject) o),
           DataPackage.Literals.SCREEN, monitor_p);
       
-      EObjectExt.apply(new UnaryReferencesClosure(application, "screens"), Collections.singletonList((EObject) o).iterator(),
+      EObjectExt.apply(new UnaryReferencesClosure(application, "screens"), Collections.singletonList((EObject) o),
           DataPackage.Literals.SCREEN, monitor_p);
       
-      EObjectExt.apply(new ExternalReferencesClosure(application, "screens"), Collections.singletonList((EObject) o).iterator(),
+      EObjectExt.apply(new ExternalReferencesClosure(application, "screens"), Collections.singletonList((EObject) o),
           DataPackage.Literals.SCREEN, monitor_p);
     }
     

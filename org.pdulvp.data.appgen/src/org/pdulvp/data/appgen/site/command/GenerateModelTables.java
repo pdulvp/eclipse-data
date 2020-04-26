@@ -119,12 +119,12 @@ public class GenerateModelTables extends TransactionalProgressCommandHandler {
     }
 
     for (DTable table : schema.getOwnedTables()) {
-    	new ModelTableTemplater(schema, tableFolder).execute(table);
-    	new ModelTemplater(schema, modelFolder).execute(table);
+    	new ModelTableTemplater(schema, tableFolder).accept(table);
+    	new ModelTemplater(schema, modelFolder).accept(table);
     }
 
-    new ControllersTemplater(schema, controllerFolder).execute(schema.eClass());
-    new FactoriesTemplater(schema, v2Folder).execute(schema.eClass());
+    new ControllersTemplater(schema, controllerFolder).accept(schema.eClass());
+    new FactoriesTemplater(schema, v2Folder).accept(schema.eClass());
 
   }
 

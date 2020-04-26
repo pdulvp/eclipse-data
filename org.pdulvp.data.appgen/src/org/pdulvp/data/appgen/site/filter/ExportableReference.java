@@ -6,8 +6,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 public class ExportableReference extends ExportableFeature {
 
 	@Override
-	public boolean evaluate(EStructuralFeature feature) {
-		return super.evaluate(feature) && feature instanceof EReference;
+	public boolean test(EStructuralFeature feature) {
+		return super.test(feature) && feature instanceof EReference;
 	}
 
 }

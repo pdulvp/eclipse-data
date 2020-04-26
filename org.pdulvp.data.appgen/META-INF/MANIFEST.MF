@@ -8,9 +8,8 @@ Require-Bundle: org.pdulvp.common,
  org.eclipse.jface,
  org.pdulvp.retriever.model.handler,
  com.juuyi.security,
- org.apache.commons.collections4,
  org.apache.commons.lang3,
  org.eclipse.sirius,
  org.pdulvp.data,
- json
+ org.json
 Export-Package: org.pdulvp.data.appgen.site.command

@@ -9,9 +9,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.map.MultiValueMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
@@ -80,24 +79,6 @@ public class JSONBufferExt {
         }
         buffer.append("]");
       }
-
-      if (keys.hasNext()) {
-        buffer.append(",");
-      }
-    }
-    buffer.append("}");
-    return buffer.toString();
-  }
-
-  public static String toJSONList(MultiValueMap<String, String> values) {
-    StringBuffer buffer = new StringBuffer();
-    buffer.append("{");
-
-    Iterator<String> keys = values.keySet().iterator();
-    while (keys.hasNext()) {
-      String key = keys.next();
-      buffer.append("\"" + key + "\"");
-      buffer.append(":");
 
       if (keys.hasNext()) {
         buffer.append(",");
@@ -272,14 +253,14 @@ public class JSONBufferExt {
     } else if (DataPackage.Literals.ABSTRACT_ITEM__TAG.equals(feature)) {
       return ((object.eGet(feature)));
 
-    } else if (new ExportableExternalAttribute().evaluate(feature)) {
+    } else if (new ExportableExternalAttribute().test(feature)) {
       if (DataPackage.Literals.IMAGE_ITEM__ICON_DATA.equals(feature)) {
         return ImageHelper.getIconData((Item) object);
 
       } else if (DataPackage.Literals.IMAGE_ITEM__IMAGE_DATA.equals(feature)) {
         return ImageHelper.getImageData((Item) object);
 
-      } else if (new ExternalAttributeType().evaluate(feature)) {
+      } else if (new ExternalAttributeType().test(feature)) {
         return toJSonExternalAttribute(feature, (EObject) object.eGet(feature));
       }
 
@@ -324,7 +305,7 @@ public class JSONBufferExt {
     if (object != null) {
 
       for (EStructuralFeature feature : JSONBufferExt.getAttributes(object.eClass())) {
-        if (new ExportableExternalAttribute().evaluate(feature)) {
+        if (new ExportableExternalAttribute().test(feature)) {
           Object value = JSONBufferExt.getExportableFeatureValue(object, feature);
           if (value != null && (value instanceof String && !((String) value).isEmpty())) {
             values.put(JSONBufferExt.getExportableFeatureName(feature), value);
@@ -492,7 +473,7 @@ public static Collection<EAnnotation> getOrderingFeatures(EClass clazz) {
 
   
   public static Collection<EStructuralFeature> getAttributes(EClass clazz) {
-    return CollectionUtils.select(clazz.getEAllStructuralFeatures(), new ExportableAttribute());
+	  return  clazz.getEAllStructuralFeatures().stream().filter( new ExportableAttribute()).collect(Collectors.toList());
   }
 
   public static boolean isExternal(ENamedElement feature) {
@@ -500,20 +481,20 @@ public static Collection<EAnnotation> getOrderingFeatures(EClass clazz) {
   }
 
   public static Collection<EStructuralFeature> getExternalAttributes(EClass clazz) {
-    return CollectionUtils.select(clazz.getEAllStructuralFeatures(), new ExportableExternalAttribute());
+	  return clazz.getEAllStructuralFeatures().stream().filter( new ExportableExternalAttribute()).collect(Collectors.toList());
   }
 
   public static Collection<EStructuralFeature> getExternalReferences(EClass clazz) {
-    return CollectionUtils.select(clazz.getEAllStructuralFeatures(), new ExportableExternalReference());
+	  return clazz.getEAllStructuralFeatures().stream().filter( new ExportableExternalReference()).collect(Collectors.toList());
   }
 
 
   public static Collection<EStructuralFeature> getManyReferences(EClass clazz) {
-    return CollectionUtils.select(clazz.getEAllStructuralFeatures(), new ExportableManyReference());
+	  return clazz.getEAllStructuralFeatures().stream().filter( new ExportableManyReference()).collect(Collectors.toList());
   }
 
   public static Collection<EStructuralFeature> getUnaryReferences(EClass clazz) {
-    return CollectionUtils.select(clazz.getEAllStructuralFeatures(), new ExportableUnaryReference());
+	  return clazz.getEAllStructuralFeatures().stream().filter( new ExportableUnaryReference()).collect(Collectors.toList());
   }
 
   public static Collection<ENamedElement> getTables(Schema schema) {

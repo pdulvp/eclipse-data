@@ -1,7 +1,9 @@
 package org.pdulvp.data.appgen.site.command;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.eclipse.core.commands.ExecutionEvent;
@@ -41,22 +43,22 @@ public class PublishCategories extends ProgressCommandHandler {
     if (root instanceof Application) {
       for (Object o : selection) {
         EObjectExt.apply(new AttributesClosure((Application) o, "applications"),
-            Collections.singletonList((EObject) o).iterator(), DataPackage.Literals.APPLICATION, monitor_p);
+            Collections.singletonList((EObject) o), DataPackage.Literals.APPLICATION, monitor_p);
         //EObjectExt.apply(new UnaryReferencesClosure((Application) o, "applications"),
-        //    Collections.singletonList((EObject) o).iterator(), DataPackage.Literals.APPLICATION, monitor_p);
+        //    Collections.singletonList((EObject) o), DataPackage.Literals.APPLICATION, monitor_p);
         //EObjectExt.apply(new ExternalReferencesClosure((Application) o, "applications"),
-        //    Collections.singletonList((EObject) o).iterator(), DataPackage.Literals.APPLICATION, monitor_p);
+        //    Collections.singletonList((EObject) o), DataPackage.Literals.APPLICATION, monitor_p);
       }
 
     } else if (root instanceof HomeItem) {
       for (Object o : selection) {
         Application application = CategoryExt.getApplication((HomeItem) o);
-        EObjectExt.apply(new AttributesClosure(application, "homeItems"), Collections.singletonList((EObject) o).iterator(),
+        EObjectExt.apply(new AttributesClosure(application, "homeItems"), Collections.singletonList((EObject) o),
             DataPackage.Literals.HOME_ITEM, monitor_p);
         EObjectExt.apply(new UnaryReferencesClosure(application, "homeItems"),
-            Collections.singletonList((EObject) o).iterator(), DataPackage.Literals.HOME_ITEM, monitor_p);
+            Collections.singletonList((EObject) o), DataPackage.Literals.HOME_ITEM, monitor_p);
         EObjectExt.apply(new ExternalReferencesClosure(application, "homeItems"),
-            Collections.singletonList((EObject) o).iterator(), DataPackage.Literals.HOME_ITEM, monitor_p);
+            Collections.singletonList((EObject) o), DataPackage.Literals.HOME_ITEM, monitor_p);
       }
 
     } else if (root instanceof Category) {
@@ -72,23 +74,24 @@ public class PublishCategories extends ProgressCommandHandler {
       for (Object o : selection) {
 
         Application application = CategoryExt.getApplication((Category) o);
-        EObjectExt.apply(new AttributesClosure(null, "products"), Collections.singletonList((EObject) o).iterator(),
+        EObjectExt.apply(new AttributesClosure(null, "products"), Collections.singletonList((EObject) o),
             DataPackage.Literals.PRODUCT, monitor_p);
         EObjectExt.apply(new UnaryReferencesClosure(null, "products"),
-            Collections.singletonList((EObject) o).iterator(), DataPackage.Literals.PRODUCT, monitor_p);
+            Collections.singletonList((EObject) o), DataPackage.Literals.PRODUCT, monitor_p);
         EObjectExt.apply(new ExternalReferencesClosure(null, "products"),
-            Collections.singletonList((EObject) o).iterator(), DataPackage.Literals.PRODUCT, monitor_p);
+            Collections.singletonList((EObject) o), DataPackage.Literals.PRODUCT, monitor_p);
       }
 
     } else if (!(root instanceof Category)) {
-
-      EObjectExt.apply(new AttributesClosure(null, "categories"), rootElement.eAllContents(),
+    	List<EObject> list = new ArrayList<>();
+    	rootElement.eAllContents().forEachRemaining(list::add);
+    	
+      EObjectExt.apply(new AttributesClosure(null, "categories"), list,
           DataPackage.Literals.CATEGORY, monitor_p);
-      EObjectExt.apply(new UnaryReferencesClosure(null, "categories"), rootElement.eAllContents(),
+      EObjectExt.apply(new UnaryReferencesClosure(null, "categories"), list,
           DataPackage.Literals.CATEGORY, monitor_p);
-      EObjectExt.apply(new ExternalReferencesClosure(null, "categories"), rootElement.eAllContents(),
+      EObjectExt.apply(new ExternalReferencesClosure(null, "categories"), list,
           DataPackage.Literals.CATEGORY, monitor_p);
-
     }
 
   }
@@ -102,12 +105,12 @@ public class PublishCategories extends ProgressCommandHandler {
 
 
     EObjectExt.apply(new AttributesClosure(application, "categories"),
-        Collections.singletonList((EObject) category).iterator(), DataPackage.Literals.CATEGORY, monitor);
+        Collections.singletonList((EObject) category), DataPackage.Literals.CATEGORY, monitor);
 
     EObjectExt.apply(new UnaryReferencesClosure(application, "categories"),
-        Collections.singletonList((EObject) category).iterator(), DataPackage.Literals.CATEGORY, monitor);
+        Collections.singletonList((EObject) category), DataPackage.Literals.CATEGORY, monitor);
 
     EObjectExt.apply(new ExternalReferencesClosure(application, "categories"),
-        Collections.singletonList((EObject) category).iterator(), DataPackage.Literals.CATEGORY, monitor);
+        Collections.singletonList((EObject) category), DataPackage.Literals.CATEGORY, monitor);
   }
 }

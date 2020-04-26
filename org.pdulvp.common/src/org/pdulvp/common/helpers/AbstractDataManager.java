@@ -57,8 +57,11 @@ public class AbstractDataManager {
 
   public static Object syncRequestPost(String path, String json, boolean auth) {
     if (!ENABLED) {
-      JSONObject obj = new JSONObject("{\"error\":{\"en-US\":\"" + "POST NOT ENABLED" + "\"}}");
-      return obj;
+    	try {
+			return new JSONObject("{\"error\":{\"en-US\":\"" + "POST NOT ENABLED" + "\"}}");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
     }
     try {
       HttpClient client = new DefaultHttpClient();
@@ -101,8 +104,12 @@ public class AbstractDataManager {
   
   public static Object syncRequestPostString(String path, String json, boolean auth, HashMap<String, String> headers) {
     if (!ENABLED) {
-      JSONObject obj = new JSONObject("{\"error\":{\"en-US\":\"" + "POST NOT ENABLED" + "\"}}");
-      return obj;
+	try {
+		return new JSONObject("{\"error\":{\"en-US\":\"" + "POST NOT ENABLED" + "\"}}");
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     }
     try {
       HttpClient client = new DefaultHttpClient();
@@ -147,8 +154,11 @@ public class AbstractDataManager {
 
   public static Object syncHttpRequestPost(String path, String json, boolean auth) {
 	    if (!ENABLED) {
-	      JSONObject obj = new JSONObject("{\"error\":{\"en-US\":\"" + "POST NOT ENABLED" + "\"}}");
-	      return obj;
+		try {
+			return new JSONObject("{\"error\":{\"en-US\":\"" + "POST NOT ENABLED" + "\"}}");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	    }
 	    try {
 	      HttpClient client = new DefaultHttpClient();

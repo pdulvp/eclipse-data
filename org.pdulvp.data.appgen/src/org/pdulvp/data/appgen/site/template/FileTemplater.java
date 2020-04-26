@@ -22,7 +22,7 @@ public class FileTemplater<T> extends Templater<T> {
   }
 
   @Override
-  public void execute(T arg0) {
+  public void accept(T arg0) {
     IFile file = folder.getFile(getFileName(arg0));
     if (file.exists()) {
       try {

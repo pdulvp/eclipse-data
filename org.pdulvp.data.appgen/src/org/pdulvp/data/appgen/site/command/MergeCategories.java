@@ -1,9 +1,9 @@
 package org.pdulvp.data.appgen.site.command;
 
 import java.util.Collection;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import org.apache.commons.collections4.Closure;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -21,7 +21,7 @@ import org.pdulvp.data.DataPackage;
 import org.pdulvp.data.ItemRoot;
 import org.pdulvp.data.appgen.site.ElementFactory;
 
-public class MergeCategories extends ProgressCommandHandler implements Closure<EObject> {
+public class MergeCategories extends ProgressCommandHandler implements Consumer<EObject> {
 
   protected Predicate enablement(IStructuredSelection selection) {
     return ca -> false;
@@ -41,7 +41,7 @@ public class MergeCategories extends ProgressCommandHandler implements Closure<E
   }
 
   @Override
-  public void execute(EObject arg0) {
+  public void accept(EObject arg0) {
     String id = ((Category) arg0).getId();
     String server = "http://cluster015.ovh.net/~pdulkvdp/public";
     Object object = AbstractDataManager.syncRequest(server + "/v2/categories/get/" + id, true);

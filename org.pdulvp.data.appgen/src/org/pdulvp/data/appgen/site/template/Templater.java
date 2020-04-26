@@ -3,11 +3,12 @@ package org.pdulvp.data.appgen.site.template;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
-import org.apache.commons.collections4.Closure;
 import org.eclipse.osgi.util.NLS;
 
-public class Templater<T> implements Closure<T> {
+public class Templater<T> implements Consumer<T> {
 
   protected StringBuffer buffer = new StringBuffer();
   private String indent = "";
@@ -70,7 +71,7 @@ public class Templater<T> implements Closure<T> {
 
   protected String list(Collection<String> primaryKeys) {
     Collection<String> result = new ArrayList<String>();
-
+    
     return list(primaryKeys, "");
   }
 
@@ -82,9 +83,9 @@ public class Templater<T> implements Closure<T> {
     indent = indent.substring(2);
   }
 
-  @Override
-  public void execute(T arg0) {
-
-  }
-
+	@Override
+	public void accept(T t) {
+		 
+	}
+	
 }

@@ -43,7 +43,7 @@ public class ControllersTemplater extends Templater<ENamedElement> {
   }
 
   @Override
-  public void execute(ENamedElement clazz) {
+  public void accept(ENamedElement clazz) {
     IFile file = folder.getFile("AbstractTableController.php");
 
     if (file.exists()) {

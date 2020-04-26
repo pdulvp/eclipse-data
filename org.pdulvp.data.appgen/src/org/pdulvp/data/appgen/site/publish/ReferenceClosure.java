@@ -1,15 +1,15 @@
 package org.pdulvp.data.appgen.site.publish;
 
 import java.util.HashMap;
+import java.util.function.Consumer;
 
-import org.apache.commons.collections4.Closure;
 import org.eclipse.emf.ecore.EObject;
 import org.pdulvp.data.Application;
 import org.pdulvp.data.appgen.site.JSONBufferExt;
 import org.pdulvp.data.appgen.site.SchemaExt;
 import org.pdulvp.data.table.DReference;
 
-public class ReferenceClosure implements Closure<DReference> {
+public class ReferenceClosure implements Consumer<DReference> {
 
   Application application ;
   String url;
@@ -25,7 +25,7 @@ public class ReferenceClosure implements Closure<DReference> {
   }
 
   @Override
-  public void execute(final DReference dreference) {
+  public void accept(final DReference dreference) {
     String url2 = JSONBufferExt.getDBTable(dreference.getFeature());
     if (url2 == null) {
       url2 = url;

@@ -2,8 +2,8 @@ package org.pdulvp.data.appgen.site.publish;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.function.Consumer;
 
-import org.apache.commons.collections4.Closure;
 import org.eclipse.emf.ecore.EObject;
 import org.pdulvp.data.Application;
 import org.pdulvp.data.SchemaClass;
@@ -13,7 +13,7 @@ import org.pdulvp.data.table.DAttribute;
 import org.pdulvp.data.table.DKey;
 import org.pdulvp.data.table.DTable;
 
-public class AttributesClosure implements Closure<EObject> {
+public class AttributesClosure implements Consumer<EObject> {
 
   Application application ;
   
@@ -28,7 +28,7 @@ public class AttributesClosure implements Closure<EObject> {
   }
 
   @Override
-  public void execute(final EObject object) {
+  public void accept(final EObject object) {
 
     SchemaClass clazz = SchemaExt.getSchemaClass(object.eClass(), application.getSchema());
     DTable table = clazz.getTable();

@@ -2,12 +2,9 @@ package org.pdulvp.data.appgen.site;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
-import org.apache.commons.collections4.Closure;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.IteratorUtils;
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
@@ -17,16 +14,6 @@ import org.pdulvp.data.AbstractItem;
 
 public class EObjectExt {
 
-	public static Predicate<EObject> filter(final EClass clazz) {
-		return new Predicate<EObject>() {
-
-			@Override
-			public boolean evaluate(EObject arg0) {
-				return clazz.isInstance(arg0);
-			}
-		};
-	}
-	
 	public static String getText(String name) {
 	  name = StringEscapeUtils.unescapeHtml4(name);
 	  try {
@@ -37,32 +24,26 @@ public class EObjectExt {
 	  return name;
 	}
 
-	public static Collection<EObject> filter(Iterator<EObject> iterator, EClass kind) {
-		Collection<EObject> list = CollectionUtils.select(IteratorUtils.toList(iterator), filter(kind));
-		return list;
-	}
-
-	public static void apply(final Closure<EObject> closure, Iterator<EObject> iterator, EClass kind, final IProgressMonitor monitor_p) {
-		Collection<EObject> list = CollectionUtils.select(IteratorUtils.toList(iterator), filter(kind));
+	public static void apply(final Consumer<EObject> closure, Collection<EObject> values, EClass kind, final IProgressMonitor monitor_p) {
+		Collection<EObject> list = values.stream().filter(x -> kind.isInstance(x)).collect(Collectors.toList());
 		monitor_p.beginTask("Apply operation " + closure.getClass().getSimpleName(), list.size());
-		CollectionUtils.forAllDo(list, new Closure<EObject>() {
+		list.stream().forEach(new Consumer<EObject>() {
 
 			@Override
-			public void execute(EObject arg0) {
-				closure.execute(arg0);
+			public void accept(EObject arg0) {
+				closure.accept(arg0);
 				monitor_p.worked(1);
 			}
 		});
 	}
 
-	public static <T> void apply(final Closure<T> closure, Iterator<T> iterator, final IProgressMonitor monitor_p) {
-		Collection<T> list = IteratorUtils.toList(iterator);
+	public static <T> void apply(final Consumer<T> closure, Collection<T> list, final IProgressMonitor monitor_p) {
 		monitor_p.beginTask("Apply operation " + closure.getClass().getSimpleName(), list.size());
-		CollectionUtils.forAllDo(list, new Closure<T>() {
+		list.stream().forEach(new Consumer<T>() {
 
 			@Override
-			public void execute(T arg0) {
-				closure.execute(arg0);
+			public void accept(T arg0) {
+				closure.accept(arg0);
 				monitor_p.worked(1);
 			}
 		});

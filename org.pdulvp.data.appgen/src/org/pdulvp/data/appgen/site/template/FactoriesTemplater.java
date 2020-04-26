@@ -43,7 +43,7 @@ public class FactoriesTemplater extends Templater<ENamedElement> {
   }
 
   @Override
-  public void execute(ENamedElement clazz) {
+  public void accept(ENamedElement clazz) {
     IFile file = folder.getFile("factories.php");
 
     if (file.exists()) {

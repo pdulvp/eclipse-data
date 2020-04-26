@@ -7,8 +7,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 public class ExportableAttribute extends ExportableFeature {
 
 	@Override
-	public boolean evaluate(EStructuralFeature feature) {
-		if (super.evaluate(feature)) {
+	public boolean test(EStructuralFeature feature) {
+		if (super.test(feature)) {
 			if (feature instanceof EAttribute) {
 				return true;
 				
